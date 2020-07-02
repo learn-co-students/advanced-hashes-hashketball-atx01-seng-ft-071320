@@ -1,4 +1,4 @@
-# Write your code below game_hash
+require "pry"
 def game_hash
   {
     home: {
@@ -126,4 +126,88 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player)
+  points_scored = 0
+  game_hash.each do |home_away, categories|
+    categories[:players].each do |player_array|
+      if player_array[:player_name] == player
+        points_scored = player_array[:points]
+      end 
+    end 
+  end
+  points_scored
+#binding.pry 
+end 
+
+def shoe_size(player)
+  shoo_size = 0
+  game_hash.each do |home_away, categories|
+    categories[:players].each do |player_array|
+      if player_array[:player_name] == player
+        shoo_size = player_array[:shoe]
+      end 
+    end 
+  end
+  shoo_size
+#binding.pry 
+end 
+
+def team_colors(team_n)
+  teem_colors = []
+  game_hash.each do |home_away, categories|
+    if categories[:team_name] == team_n
+      teem_colors = categories[:colors]
+    end 
+  end 
+  teem_colors
+ # binding.pry
+end
+
+def team_names
+  teem_names = []
+  game_hash.each do |home_away, categories|
+    teem_names.push categories[:team_name]
+  end 
+  teem_names
+  #binding.pry 
+end
+
+def player_numbers(team_n)
+  jersey_numbers = []
+  game_hash.each do |home_away, categories|
+    if categories[:team_name] == team_n
+      jersey_numbers = categories[:players].map { |player| player[:number] }
+    end
+  end
+  jersey_numbers
+end
+
+def player_stats(player)
+  da_stats = {}
+  game_hash.each do |home_away, categories|
+    categories[:players].each do |player_n|
+      if player_n[:player_name] == player
+        #player_array[:players].each_with_object({}) {|k,v, da_stats|}
+        #da_stats = stats.each {|k,v| k = v}
+        return player_n.each_pair { |stat, value| }
+      end 
+    end 
+    #da_stats
+  end
+  #binding.pry 
+end 
+
+def big_shoe_rebounds
+  biggest_shoe = 0 
+  num_rebounds = 0 
+  game_hash.each do |home_away, categories|
+    categories[:players].each do |player_n|
+      size = player_n[:shoe]
+      if size > biggest_shoe
+        biggest_shoe = size
+        num_rebounds = player_n[:rebounds]
+      end 
+    end 
+  end
+  num_rebounds
+end
