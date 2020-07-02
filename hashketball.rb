@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require "pry"
+
 def game_hash
   {
     home: {
@@ -127,3 +129,79 @@ def game_hash
 end
 
 # Write code here
+
+def get_player_helper
+  home_players=game_hash[:home][:players]
+  away_players=game_hash[:away][:players]
+  home_players+away_players
+end
+
+
+def get_team_helper(team)
+  case team
+    when game_hash[:home][:team_name]
+      game_hash[:home]
+    when game_hash[:away][:team_name]
+      game_hash[:away]
+  end
+end
+
+
+def player_numbers(team)
+  get_team_helper(team)[:players].map do |player|
+    player[:number]
+  end
+end
+
+
+def num_points_scored(player_name)
+  player_game_stats = get_player_helper.find do |player|
+                        player_name == player[:player_name]
+                      end
+  player_game_stats[:points]
+end
+
+
+def shoe_size(player_name)
+  player_game_stats = get_player_helper.find do |player|
+                        player_name == player[:player_name]
+                      end
+  player_game_stats[:shoe]
+end
+
+
+def team_colors(team)
+  get_team_helper(team)[:colors]
+end
+
+
+def player_stats(player_name)
+  stats=get_player_helper.find do |player_name_value|
+          player_name == player_name_value[:player_name]
+        end
+end
+
+
+def team_names
+  #map is altering game_hash by looking at the key (home and away) and returning the value (what's inside and directly accessible (home and away) of their team names
+  game_hash.map do |home_or_away_key, team_info_value|
+    team_info_value[:team_name]
+  end
+end
+
+
+def big_shoe_rebounds()
+
+shoe_size = 0
+rebounds = 0
+
+  game_hash.each do |home_or_away_key, team_info_value|
+    team_info_value[:players].each do |player_stats_key|
+      if player_stats_key[:shoe] > shoe_size
+        shoe_size = player_stats_key[:shoe]
+        rebounds = player_stats_key[:rebounds]
+      end
+    end
+  end
+  rebounds
+end
