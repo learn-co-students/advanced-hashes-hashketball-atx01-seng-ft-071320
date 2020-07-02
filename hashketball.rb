@@ -65,7 +65,7 @@ def game_hash
     away: {
       team_name: "Charlotte Hornets",
       colors: ["Turquoise", "Purple"],
-      players: [
+      players:[
         {
           player_name: "Jeff Adrien",
           number: 4,
@@ -127,3 +127,113 @@ def game_hash
 end
 
 # Write code here
+def helper
+  array = []
+  array.push(game_hash[:home][:players])
+  array.push(game_hash[:away][:players])
+  array
+end
+
+def team_helper
+  new_array = []
+  new_array.push(game_hash[:home][:colors])
+  new_array.push(game_hash[:away][:colors])
+  pp new_array
+end
+
+def num_points_scored(player_name)
+  points = 0
+  helper.each do |i|
+    i.each do |hash|
+      hash.each do |key, value|
+        if player_name == value
+          points = hash[:points]
+        end
+      end
+    end
+  end
+  points
+end
+
+def shoe_size(player_name)
+  shoe = 0
+  helper.each do |i|
+    i.each do |hash|
+      hash.each do |key, value|
+        if player_name == value
+          shoe = hash[:shoe]
+        end
+      end
+    end
+  end
+  shoe
+end
+
+def team_colors(team_name)
+  colors = ""
+  if team_name == "Brooklyn Nets"
+    colors = team_helper[0]
+  end
+  if team_name == "Charlotte Hornets"
+    colors = team_helper[1]
+  end
+  colors
+end
+
+def team_names
+  team_array = []
+  team_array.push(game_hash[:home][:team_name])
+  team_array.push(game_hash[:away][:team_name])
+  team_array
+end
+
+def player_numbers(team_name)
+  numbers_array = []
+  if team_name == "Brooklyn Nets"
+    game_hash[:home][:players].each do |hash|
+      hash.each do |key, value|
+        numbers_array.push(hash[:number])
+      end
+    end
+  end
+  if team_name == "Charlotte Hornets"
+    game_hash[:away][:players].each do |hash|
+      hash.each do |key, value|
+        numbers_array.push(hash[:number])
+      end
+    end
+  end
+  numbers_array = numbers_array.uniq
+  numbers_array
+end
+
+def player_stats(player_name)
+    new_hash = {}
+    helper.each do |i|
+    i.each do |hash|
+      hash.each do |key, value|
+        if player_name == value
+          new_hash = hash
+        end
+      end
+    end
+  end
+  new_hash
+end
+
+def big_shoe_rebounds
+  rebounds = 0
+  helper.each do |i|
+    i.each do |hash|
+      hash.each do |key, value|
+        if hash[:shoe] > 18
+          rebounds = hash[:rebounds]
+        end
+      end
+    end
+  end
+  rebounds
+end
+
+
+
