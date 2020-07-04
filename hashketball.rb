@@ -175,19 +175,21 @@ end
 
 
 
-def player_numbers(team_name)
+def player_numbers(team_n)
   jersey_numbers = []
- game_hash.each do |home_away, team_info|
-   team_info.map do |team_name, descriptions|
-     if team_info[:team_name] == team_name
-       descriptions[:players].each do |stats|
-         jersey_numbers << descriptions[:players][:number]
-      end 
-    end    
+   game_hash.each do |home_away, team_info|
+   team_info.each do |team_name, descriptions|
+        if team_info[:team_name] == team_n 
+             team_info[:players].each do |stats|
+             jersey_numbers << stats[:number]
+           #binding.pry 
+           end
+       #binding.pry
+     end 
    #binding.pry   
-  end   
- end
- jersey_numbers
+   end   
+  end
+ jersey_numbers.uniq
 end
 
 
