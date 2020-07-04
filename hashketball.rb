@@ -128,14 +128,66 @@ def game_hash
 end
 
 # Write code here
-def num_points_scored(player)
+def num_points_scored(player_name)
 game_hash.each do |home_away, team_info|
-  #binding.pry
-  home_away do |k,v|
-    binding.pry 
-  end 
+       team_info[:players].each do |player_description| 
+         if player_description[:player_name] == player_name
+           return player_description[:points]
+           
+         binding.pry
+    end      
+  end
+ end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |home_away, team_info|
+   team_info[:players].each do |player_stats|
+    if player_stats[:player_name] == player_name
+      return player_stats[:shoe]
+    binding.pry
+    end
+   end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |home_away, team_info|
+    if team_info[:team_name] == team_name
+      return team_info[:colors]
+    
+  end
+  #binding.pry 
+ end
+end
+
+
+def team_names
+  team_names_array = []
+  game_hash.each do |home_away, team_info|
+    team_info.each do|team_name, name|
+      team_names_array << team_info[:team_name]
+    #binding.pry 
+  end
+ end 
+ team_names_array.uniq 
 end 
 
+
+
+def player_numbers(team_name)
+  jersey_numbers = []
+ game_hash.each do |home_away, team_info|
+   team_info.map do |team_name, descriptions|
+     if team_info[:team_name] == team_name
+       descriptions[:players].each do |stats|
+         jersey_numbers << descriptions[:players][:number]
+      end 
+    end    
+   #binding.pry   
+  end   
+ end
+ jersey_numbers
 end
 
 
