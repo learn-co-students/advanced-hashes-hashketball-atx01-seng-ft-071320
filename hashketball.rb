@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -127,3 +128,14 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player)
+game_hash.each do |home_away, team_info|
+  #binding.pry
+  home_away do |k,v|
+    binding.pry 
+  end 
+end 
+
+end
+
+
