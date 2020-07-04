@@ -204,3 +204,13 @@ def player_stats(player_n)
 end
 
 
+def big_shoe_rebounds
+  biggest_shoe_size = 14 
+   game_hash.each do |home_away, team_info|
+    team_info[:players] do |player_stats|
+      
+
+binding.pry
+  end
+ end
+end 
