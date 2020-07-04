@@ -192,10 +192,15 @@ def player_numbers(team_n)
  jersey_numbers.uniq
 end
 
-def player_stats(team_n)
+def player_stats(player_n)
   game_hash.each do |home_away, team_info|
-  team_info[:players] do |player_stats|
-   binding.pry 
+  team_info[:players].each do |player_stats|
+    if player_stats[:player_name] == player_n
+      return player_stats
+    end 
+   #binding.pry 
   end
  end 
 end
+
+
