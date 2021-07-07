@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -127,3 +128,97 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player_name)
+game_hash.each do |home_away, team_info|
+       team_info[:players].each do |player_description| 
+         if player_description[:player_name] == player_name
+           return player_description[:points]
+           
+         binding.pry
+    end      
+  end
+ end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |home_away, team_info|
+   team_info[:players].each do |player_stats|
+    if player_stats[:player_name] == player_name
+      return player_stats[:shoe]
+    binding.pry
+    end
+   end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |home_away, team_info|
+    if team_info[:team_name] == team_name
+      return team_info[:colors]
+    
+  end
+  #binding.pry 
+ end
+end
+
+
+def team_names
+  team_names_array = []
+  game_hash.each do |home_away, team_info|
+    team_info.each do|team_name, name|
+      team_names_array << team_info[:team_name]
+    #binding.pry 
+  end
+ end 
+ team_names_array.uniq 
+end 
+
+
+
+def player_numbers(team_n)
+  jersey_numbers = []
+   game_hash.each do |home_away, team_info|
+   team_info.each do |team_name, descriptions|
+        if team_info[:team_name] == team_n 
+             team_info[:players].each do |stats|
+             jersey_numbers << stats[:number]
+           #binding.pry 
+           end
+       #binding.pry
+     end 
+   #binding.pry   
+   end   
+  end
+ jersey_numbers.uniq
+end
+
+def player_stats(player_n)
+  game_hash.each do |home_away, team_info|
+  team_info[:players].each do |player_stats|
+    if player_stats[:player_name] == player_n
+      return player_stats
+    end 
+   #binding.pry 
+  end
+ end 
+end
+
+
+def big_shoe_rebounds
+  biggest_shoe_size = 14 
+  num_of_rebounds = nil 
+  
+   game_hash.each do |home_away, team_info|
+    team_info[:players].each do |player_stats|
+     if player_stats[:shoe] > biggest_shoe_size
+       biggest_shoe_size = player_stats[:shoe]   
+    end
+     if player_stats[:shoe] == biggest_shoe_size
+        num_of_rebounds = player_stats[:rebounds] 
+    end 
+  #binding.pry
+ 
+  end
+ end
+ num_of_rebounds
+end 
